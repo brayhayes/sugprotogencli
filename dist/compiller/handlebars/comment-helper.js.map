@@ -1,0 +1,1 @@
+{"version":3,"file":"comment-helper.js","sourceRoot":"","sources":["../../../src/compiller/handlebars/comment-helper.ts"],"names":[],"mappings":";;AAAA,2CAA4C;AAE5C,2BAAc,CAAC,SAAS,EAAE;IACtB,IAAI,IAAI,CAAC,OAAO,EAAE;QACd,OAAO,MAAM,IAAI,CAAC,OAAO,CAAC,OAAO,CAAC,KAAK,EAAE,OAAO,CAAC,EAAE,CAAC;KACvD;AACL,CAAC,CAAC,CAAC"}

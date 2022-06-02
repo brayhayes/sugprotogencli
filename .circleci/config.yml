@@ -32,7 +32,7 @@ aliases:
 
 jobs:
   build:
-    working_directory: ~/nestjs-proto-gen-ts
+    working_directory: ~/sug-protgen-cli
     docker:
       - image: circleci/node:12
     steps:
@@ -44,7 +44,7 @@ jobs:
       - *build-packages
 
   proto-gen:
-    working_directory: ~/nestjs-proto-gen-ts
+    working_directory: ~/sug-protgen-cli
     docker:
       - image: circleci/node:12
     steps:
@@ -57,7 +57,7 @@ jobs:
       - *proto-gen
 
   test:
-    working_directory: ~/nestjs-proto-gen-ts
+    working_directory: ~/sug-protgen-cli
     docker:
       - image: circleci/node:12
     steps:
@@ -72,7 +72,7 @@ jobs:
           command: npm run test
 
   lint:
-    working_directory: ~/nestjs-proto-gen-ts
+    working_directory: ~/sug-protgen-cli
     docker:
       - image: circleci/node:12
     steps:

@@ -12,7 +12,7 @@ The package does not rely on the `protoc' compiler and generates TypeScript code
 ## Installation
 
 ```bash
-$ npm install nestjs-proto-gen-ts
+$ npm install sug-protgen-cli
 ```
 
 ## Example
