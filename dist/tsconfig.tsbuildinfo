@@ -222,7 +222,7 @@
         "affectsGlobalScope": false
       },
       "../src/cli/index.ts": {
-        "version": "96bfe9b6ea2278d66976fe5dd973b4272131d3637bd4dd1c793dfaf7bdcd0fc7",
+        "version": "1010674fa980c26ff402a96573751919ce67d3db9b8adde1b7c39e1eba6d3c67",
         "signature": "af2f44b9b4b3cc354b1abae5e96a29a465ae22407bbc5cd112ecbf035266b91e",
         "affectsGlobalScope": false
       },

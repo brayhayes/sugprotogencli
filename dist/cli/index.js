@@ -56,5 +56,5 @@ exports.cli = yargs_1.usage('Extract and merge locale files.\nUsage: $0 [options
 if (exports.cli === null || exports.cli === void 0 ? void 0 : exports.cli.template) {
     exports.cli.template = path_1.resolve(process.cwd(), exports.cli.template);
 }
-const compiller = new compiller_1.Compiller(Object.assign({}, options_1.options));
+const compiller = new compiller_1.Compiller(Object.assign(Object.assign({}, options_1.options), exports.cli));
 compiller.compile();

@@ -67,7 +67,7 @@ if (cli?.template) {
  * @param {IGenOptions}
  */
 //const compiller = new Compiller({ ...options, ...cli });
-const compiller = new Compiller({ ...options });
+const compiller = new Compiller({ ...options, ...cli });
 
 /** CLI Task Run */
 compiller.compile();
