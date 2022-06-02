@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package sug;
+
+message User {
+  optional int32 p_id = 1;
+  optional string p_email = 2;
+  optional string p_firstname = 3;
+  optional string p_lastname = 4;
+  optional bool p_verified = 5;
+  optional string p_features = 6;
+  optional User p_parent = 7;
+  optional MemberSubscription p_subscription = 8;
+  optional IDateFormat p_dateFormat = 9;
+  optional ITimezone p_timezone = 10;
+  optional IPayments p_payments = 11;
+  optional UserPermissions p_permissions = 12;
+  optional bool p_isAdmin = 13;
+  optional bool p_isFullMember = 14;
+  optional string p_ipAddress = 15;
+  optional string p_faUserId = 16;
+}
+
+message IDateFormat {
+  optional int32 id = 1;
+  optional string short = 2;
+  optional string medium = 3;
+  optional string long = 4;
+}
+
+message ITimezone {
+  optional int32 id = 1;
+  optional string name = 2;
+  optional string abbreviation = 3;
+}
+
+message IPayments {
+  optional string gateway = 1;
+  optional string currencyCode = 2;
+}
+
+message MemberSubscription {
+  optional string p_productCode = 1;
+  optional string p_productName = 2;
+  optional int32 p_durationMonths = 3;
+  optional int32 p_orderid = 4;
+  optional int32 p_subscriptionid = 5;
+  optional bool p_isAutoRenew = 6;
+  optional google.protobuf.Timestamp p_expiration = 7;  
+}
+
+message SubAdminPerms {
+  repeated string p_general = 1;
+  repeated string p_allSignups = 2;
+  optional string p_signups = 3;
+  optional string p_groups = 4;
+}
+
+message IUserRole {
+  int32 roleid = 1;
+  string name = 2;
+}
+
+message UserPermissions {
+  SubAdminPerms p_subAdminPerms = 1;
+  string p_signupsOwned = 2;
+  string p_groupsOwned = 3;
+  IUserRole p_role = 4;
+}

@@ -1,0 +1,308 @@
+syntax = "proto3";
+
+
+import "user.proto";
+
+package sug;
+
+service MembersMicroservice {
+  rpc UpdateProfile (UpdateProfileRequestDto) returns (UpdateProfileResponseDto) {}
+  rpc GetProfile (GetProfileRequestDto) returns (GetProfileResponseDto) {}
+  rpc Create (CreateRequestDto) returns (CreateResponseDto) {}
+  rpc OwnerIsPro (OwnerIsProRequestDto) returns (OwnerIsProResponseDto) {}
+  rpc ChangePassword (ChangePasswordRequestDto) returns (ChangePasswordResponseDto) {}
+  rpc FindOneUser (FindOneUserRequestDto) returns (FindOneUserResponseDto) {}
+  rpc FindOneMember (FindOneMemberRequestDto) returns (FindOneMemberResponseDto) {}
+  rpc FindOneUserByEmail (FindOneUserByEmailRequestDto) returns (FindOneUserByEmailResponseDto) {}
+  rpc GetSubscribedGroups (GetSubscribedGroupsRequestDto) returns (GetSubscribedGroupsResponseDto) {}
+  rpc UnsubscribeFromGroup (UnsubscribeFromGroupRequestDto) returns (UnsubscribeFromGroupResponseDto) {}
+  rpc GetBlockedMembers (GetBlockedMembersRequestDto) returns (GetBlockedMembersResponseDto) {}
+  rpc DeleteBlockedMember (DeleteBlockedMemberRequestDto) returns (DeleteBlockedMemberResponseDto) {}
+  rpc AddBlockedMembers (AddBlockedMembersRequestDto) returns (AddBlockedMembersResponseDto) {}
+  rpc SignupSettings (SignupSettingsRequestDto) returns (SignupSettingsResponseDto) {}
+  rpc GetNewsletterSubscriptions (GetNewsletterSubscriptionsRequestDto) returns (GetNewsletterSubscriptionsResponseDto) {}
+  rpc UpdateNewsletterSubscription (UpdateNewsletterSubscriptionRequestDto) returns (UpdateNewsletterSubscriptionResponseDto) {}
+}
+
+message UpdateProfileRequestDto {
+  message UpdateProfileRequestBodyDto {
+    optional string address1 = 1;
+    optional string address2 = 2;
+    optional string city = 3;
+    optional string state = 4;
+    optional string postalcode = 5;
+    optional int32 countryid = 6;
+
+  }
+  sug.User user = 1;
+  UpdateProfileRequestBodyDto data = 2;
+}
+
+message UpdateProfileResponseDto {
+  bool success = 1;
+}
+
+message GetProfileRequestDto {
+  sug.User user = 1;
+}
+
+message GetProfileResponseDto {
+  message GetProfileResponseAddressDto {
+    string address1 = 1;
+    string address2 = 2;
+    string city = 3;
+    string state = 4;
+    string zipCode = 5;
+    string country = 6;
+  }
+  message GetProfileResponsePhoneDto {    
+    string type = 1;
+    string value = 2;
+    bool preferred = 3;
+    int32 carrierId = 4;
+    string carrier = 5;
+  }
+
+  message GetProfileResponseOrganizationDto {
+    string name = 1;
+    string title = 2;
+    string size = 3;
+    string type = 4;
+    string subtype = 5;
+    int32 orgsizeid = 6;
+    int32 orgtypeid = 7;
+    int32 orgsubtypeid = 8;
+  }
+
+  message GetProfileResponseProfilePictureDto {
+
+    string type = 1;
+    string small =  2; 
+    string large = 3;
+    string medium = 4;
+    string xlarge = 5;
+    string text = 6;
+  }
+
+  int32 id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+  GetProfileResponseAddressDto address = 5;
+  repeated GetProfileResponsePhoneDto phone = 6;
+  GetProfileResponseOrganizationDto organization = 7;
+  GetProfileResponseProfilePictureDto profilePicture = 8;
+
+}
+
+message CreateRequestDto {
+  message CreateRequestMemberDto {
+   message CreateMemberContactInfoDto {
+     string address1 = 1;
+     string address2 = 2;
+     string city = 3;
+     string state = 4;
+     string zipcode = 5;
+     int32 country = 6;
+     string mobilephone = 7;
+     string homephone = 8;
+     string workphone = 9;
+     string preferredphone = 10;
+   } 
+
+   string email = 1;
+   optional string firstname = 2;
+   optional string lastname = 3;
+   optional int32 parentid  = 4;
+   optional string reminders = 5;
+   optional CreateMemberContactInfoDto contactInfo  = 6;
+   optional int32 emaildomainid = 7;
+   optional bool isgroupemail = 8;
+
+  }
+
+  CreateRequestMemberDto data = 1;
+}
+
+message CreateResponseDto {
+  message CreateMemberContactInfoResponseDto {
+    int32 id = 1;
+    int32 memberid = 2;
+    string address1 = 3;
+    string address2 = 4;
+    string city = 5;
+    string state = 6;
+    string zipcode = 7;
+    int32 country = 8;
+    string mobilephone = 9;
+    string homephone = 10;
+    string workphone = 11;
+    string preferredphone = 12;
+  }
+
+  int32 id = 1;
+  string email = 2;
+  string firstname = 3;
+  string lastname = 4;
+  int32 parentid  = 5;
+  string reminders = 6;
+  CreateMemberContactInfoResponseDto contactInfo  = 7;
+
+}
+
+message OwnerIsProRequestDto {
+  int32 memberid = 1;
+}
+
+message OwnerIsProResponseDto {
+  bool success = 1;
+}
+
+message ChangePasswordRequestDto {
+  sug.User user = 1;
+}
+
+message ChangePasswordResponseDto {
+  bool success = 1;
+}
+
+message FindOneUserRequestDto {
+  int32 memberid = 1;
+  repeated string additionalData = 2;
+  optional int32 parentid = 3;
+  optional int32 roleid = 4;
+}
+
+message FindOneUserResponseDto {
+  sug.User user = 1;
+}
+
+message FindOneMemberRequestDto {
+  int32 memberid = 1;
+
+}
+
+message FindOneMemberResponseDto {
+  sug.User user = 1;
+}
+
+message FindOneUserByEmailRequestDto {
+  string memberemail = 1;
+  repeated string additionalData = 2;
+  optional int32 parentid = 3;
+  optional int32 roleid = 4;
+}
+
+message FindOneUserByEmailResponseDto {
+  sug.User user = 1;
+}
+
+message GetSubscribedGroupsRequestDto {
+  sug.User user = 1;
+}
+
+message GetSubscribedGroupsResponseDto {
+  message GetSubscribedGroupsResponseBodyDto {
+    int32 groupId = 1;
+    string groupName = 2;
+    string firstName = 3;
+    string lastName = 4;
+    int32 memberId = 5;
+  }
+  repeated GetSubscribedGroupsResponseBodyDto data = 1;
+}
+
+message UnsubscribeFromGroupRequestDto {
+
+  sug.User user = 1;
+  repeated int32 groupIds = 2;
+}
+
+message UnsubscribeFromGroupResponseDto {
+  bool success = 1;
+}
+
+message GetBlockedMembersRequestDto {
+  sug.User user = 1;
+}
+
+message GetBlockedMembersResponseDto {
+  int32 id = 1;
+  optional string firstname = 2;
+  optional string lastname = 3;
+  optional string memberid = 4;
+}
+
+message DeleteBlockedMemberRequestDto {
+  sug.User user = 1;
+  int32 blockedMemberId = 2;
+}
+
+message DeleteBlockedMemberResponseDto {
+  bool success = 1;
+}
+
+message AddBlockedMembersRequestDto {
+  sug.User user = 1;
+  string email = 2;
+}
+
+message AddBlockedMembersResponseDto {
+  bool success = 1;
+}
+
+message SignupSettingsRequestDto {
+  sug.User user = 1;
+}
+
+message SignupSettingsResponseDto {
+  message SignupSettingsResponseBodyDto {
+    int32 id = 1;
+    string type = 2;
+    string code = 3;
+    string setting = 4;
+    string fieldtype = 5;
+    string value = 6;
+    string validvalues = 7;
+    int32 parentid = 8;
+    bool forced = 9;
+  }
+
+  repeated SignupSettingsResponseDto data = 1;
+}
+
+message GetNewsletterSubscriptionsRequestDto {
+  sug.User user = 1;
+}
+
+message GetNewsletterSubscriptionsResponseDto {
+  message GetNewsletterSubscriptionsResponseBodyDto {
+    string name = 1;
+    string  description = 2;
+    string  frequency = 3;
+    int32 id = 4;
+    int32 newslettersubscriptionid = 5;
+    bool status = 6;
+    string  title = 7;
+    string  type = 8;
+
+  }
+
+  repeated GetNewsletterSubscriptionsResponseBodyDto data = 1;
+}
+
+message UpdateNewsletterSubscriptionRequestDto {
+  message UpdateNewsletterSubscriptionRequestBodyDto {
+    int32 id = 1;
+    int32 newslettersubscriptionid = 2;
+    bool status = 3;
+    string type = 4;
+
+  }
+  sug.User user = 1;
+  UpdateNewsletterSubscriptionRequestDto data = 2;
+}
+
+message UpdateNewsletterSubscriptionResponseDto {
+ bool success = 1;
+}
