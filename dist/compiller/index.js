@@ -88,9 +88,10 @@ class Compiller {
         this.walkTree(root);
         if (root.nested) {
             let test;
-            const generalTemplate = fs_extra_1.readFileSync("templates/nestjs-grpc.hbs", 'utf8');
-            const requestTemplate = fs_extra_1.readFileSync("templates/request-class-dto.hbs", 'utf8');
-            const responseTemplate = fs_extra_1.readFileSync("templates/response-class-dto.hbs", 'utf8');
+            let hbTemplate = path_1.resolve(__dirname, '../..', this.options.template);
+            const generalTemplate = fs_extra_1.readFileSync(path_1.resolve(__dirname, '../..', "templates/nestjs-grpc.hbs"), 'utf8');
+            const requestTemplate = fs_extra_1.readFileSync(path_1.resolve(__dirname, '../..', "templates/request-class-dto.hbs"), 'utf8');
+            const responseTemplate = fs_extra_1.readFileSync(path_1.resolve(__dirname, '../..', "templates/response-class-dto.hbs"), 'utf8');
             Object.keys(root.nested).forEach((key) => {
                 let newRoot = root.nested[key];
                 let a = newRoot._nestedArray;

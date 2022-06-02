@@ -121,9 +121,12 @@ export class Compiller {
 
         if (root.nested) {
             let test: any;
-            const generalTemplate = readFileSync("templates/nestjs-grpc.hbs", 'utf8');
-            const requestTemplate = readFileSync("templates/request-class-dto.hbs", 'utf8');
-            const responseTemplate = readFileSync("templates/response-class-dto.hbs", 'utf8');
+            //todo make dynamic
+        let hbTemplate = resolve(__dirname, '../..', this.options.template);
+
+            const generalTemplate = readFileSync(resolve(__dirname, '../..', "templates/nestjs-grpc.hbs"), 'utf8');
+            const requestTemplate = readFileSync(resolve(__dirname, '../..', "templates/request-class-dto.hbs"), 'utf8');
+            const responseTemplate = readFileSync(resolve(__dirname, '../..', "templates/response-class-dto.hbs"), 'utf8');
 
             Object.keys(root.nested).forEach((key) => {
                 let newRoot: any = root.nested[key];
