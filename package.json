@@ -28,7 +28,7 @@
         "sugprotogen": "bin/cli"
     },
     "engines": {
-        "node": ">=16.15.0"
+        "node": ">=10.24.1"
     },
     "repository": {
         "type": "git",
