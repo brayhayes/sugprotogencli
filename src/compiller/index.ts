@@ -120,17 +120,16 @@ export class Compiller {
         // outputFileSync(outputPath, results, 'utf8');
 
         if (root.nested) {
-            let test: any;
             //todo make dynamic
-        let hbTemplate = resolve(__dirname, '../..', this.options.template);
 
             const generalTemplate = readFileSync(resolve(__dirname, '../..', "templates/nestjs-grpc.hbs"), 'utf8');
             const requestTemplate = readFileSync(resolve(__dirname, '../..', "templates/request-class-dto.hbs"), 'utf8');
             const responseTemplate = readFileSync(resolve(__dirname, '../..', "templates/response-class-dto.hbs"), 'utf8');
-
+            const controlleTemplate = readFileSync(resolve(__dirname, '../..', "templates/controller-class.hbs"), 'utf8');
+            let hasCreatedController: boolean;
             Object.keys(root.nested).forEach((key) => {
-                let newRoot: any = root.nested[key];
-                let a = newRoot._nestedArray;
+                const newRoot: any = root.nested[key];
+                const a = newRoot._nestedArray;
                 a.forEach(element => {
                     let outputFolder = this.options.output;
                     let tmpl = generalTemplate;
@@ -146,12 +145,27 @@ export class Compiller {
                     
                     file = element.name + '.ts';
 
-                    let newOne = { nested: {[element.name]:  element }};
+                    const newOne = { nested: {[element.name]:  element }};
                     const results = compile(tmpl)(newOne);
                     const outputFile = outputFolder ? join(outputFolder, file.replace(/^.+?[/\\]/, '')) : file;
                     const outputPath = join(dirname(outputFile), `${basename(file, extname(file))}.ts`);
             
-                    outputFileSync(outputPath, results, 'utf8');                    
+                    outputFileSync(outputPath, results, 'utf8');   
+                    
+                    if (element.name.includes("service")) {
+                        outputFolder += '/controller';
+                        tmpl = responseTemplate;
+                    
+                    
+                    file = element.name + 'Controller.ts';
+
+                    const newOne = { nested: {[element.name]:  element }};
+                    const results = compile(controlleTemplate)(newOne);
+                    const outputFile = outputFolder ? join(outputFolder, file.replace(/^.+?[/\\]/, '')) : file;
+                    const outputPath = join(dirname(outputFile), `${basename(file, extname(file))}.ts`);
+            
+                    outputFileSync(outputPath, results, 'utf8');
+                    } 
                 });
             });
         }

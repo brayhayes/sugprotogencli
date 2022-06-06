@@ -1,0 +1,113 @@
+import { Metadata } from '@grpc/grpc-js';
+import { Observable } from 'rxjs';
+
+
+{{#*inline "selector"}}
+{{#each nested}}
+{{#if fields}}
+{{> type }}
+{{else if methods}}
+{{> serviceImportRequest }}
+{{> service }}
+{{else if values}}
+{{> enum }}
+{{else}}
+{{> namespace }}
+{{/if}}
+{{/each}}
+{{/inline}}
+
+{{> selector }}
+
+
+{{#*inline "namespace"}}
+{{> selector }}
+{{/inline}}
+
+{{#*inline "serviceImportRequest"}}
+import {
+{{#each methods}}
+    {{this.requestType}},
+{{/each}}
+ } from './request';
+
+import {
+{{#each methods}}
+    {{this.responseType}},
+{{/each}}
+ } from './response';
+
+
+{{> selector }}
+{{/inline}}
+
+
+{{#*inline "service"}}
+@Controller()
+export class {{@key}}Controller {
+{{#each methods}}
+    @GrpcMethod('{{../name}}', '{{@key}}')
+    {{uncapitalize @key}}(
+        request: {{this.requestType}}, 
+        metadata?: Metadata
+    ): Promise<{{this.responseType}}> | Observable<{{this.responseType}}>{
+        return {};
+    }
+
+{{/each}}
+}
+{{> selector }}
+{{/inline}}
+
+
+{{#*inline "type"}}
+{{#each fields}}
+{{else}}
+// tslint:disable-next-line:no-empty-interface
+{{/each}}
+{{#if comment}}
+{{comment}}
+{{/if}}
+export class {{@key}} {
+{{#each fields}}
+{{#if comment}}
+    {{comment}}
+{{/if}}
+    {{#if this.options.proto3_optional}}
+        {{@key}}!: {{type this}};
+    {{else}}
+        {{@key}}?: {{type this}};
+    {{/if}}
+{{/each}}
+}
+
+{{#if nested}}
+export namespace {{@key}} {
+{{#if comment}}
+    {{comment}}
+{{/if}}
+    {{> selector }}
+}
+
+{{/if}}
+{{/inline}}
+
+
+{{#*inline "enum"}}
+{{#each values}}
+{{else}}
+// tslint:disable-next-line:no-empty-interface
+{{/each}}
+{{#if comment}}
+{{comment}}
+{{/if}}
+{{var "comments" comments ~}}
+export enum {{@key}} {
+{{#each values}}
+{{#if (enumComment @key)}}
+    {{enumComment @key}}
+{{/if}}
+    {{@key}} = {{this}},
+{{/each}}
+}
+{{/inline}}

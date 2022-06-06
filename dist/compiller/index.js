@@ -87,14 +87,14 @@ class Compiller {
         }).resolveAll();
         this.walkTree(root);
         if (root.nested) {
-            let test;
-            let hbTemplate = path_1.resolve(__dirname, '../..', this.options.template);
             const generalTemplate = fs_extra_1.readFileSync(path_1.resolve(__dirname, '../..', "templates/nestjs-grpc.hbs"), 'utf8');
             const requestTemplate = fs_extra_1.readFileSync(path_1.resolve(__dirname, '../..', "templates/request-class-dto.hbs"), 'utf8');
             const responseTemplate = fs_extra_1.readFileSync(path_1.resolve(__dirname, '../..', "templates/response-class-dto.hbs"), 'utf8');
+            const controlleTemplate = fs_extra_1.readFileSync(path_1.resolve(__dirname, '../..', "templates/controller-class.hbs"), 'utf8');
+            let hasCreatedController;
             Object.keys(root.nested).forEach((key) => {
-                let newRoot = root.nested[key];
-                let a = newRoot._nestedArray;
+                const newRoot = root.nested[key];
+                const a = newRoot._nestedArray;
                 a.forEach(element => {
                     let outputFolder = this.options.output;
                     let tmpl = generalTemplate;
@@ -107,11 +107,21 @@ class Compiller {
                         tmpl = responseTemplate;
                     }
                     file = element.name + '.ts';
-                    let newOne = { nested: { [element.name]: element } };
+                    const newOne = { nested: { [element.name]: element } };
                     const results = handlebars_1.compile(tmpl)(newOne);
                     const outputFile = outputFolder ? path_1.join(outputFolder, file.replace(/^.+?[/\\]/, '')) : file;
                     const outputPath = path_1.join(path_1.dirname(outputFile), `${path_1.basename(file, path_1.extname(file))}.ts`);
                     fs_extra_1.outputFileSync(outputPath, results, 'utf8');
+                    if (element.name.includes("service")) {
+                        outputFolder += '/controller';
+                        tmpl = responseTemplate;
+                        file = element.name + 'Controller.ts';
+                        const newOne = { nested: { [element.name]: element } };
+                        const results = handlebars_1.compile(controlleTemplate)(newOne);
+                        const outputFile = outputFolder ? path_1.join(outputFolder, file.replace(/^.+?[/\\]/, '')) : file;
+                        const outputPath = path_1.join(path_1.dirname(outputFile), `${path_1.basename(file, path_1.extname(file))}.ts`);
+                        fs_extra_1.outputFileSync(outputPath, results, 'utf8');
+                    }
                 });
             });
         }
