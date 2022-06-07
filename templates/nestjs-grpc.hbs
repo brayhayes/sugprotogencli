@@ -57,17 +57,19 @@ export interface I{{@key}} {
 {{/if}}
     {{#if this.requestStream}}
     {{uncapitalize @key}}(
-        request: Observable<{{this.requestType}}>, 
+        request: Promise<{{this.requestType}}>, 
         metadata?: Metadata
-    ): Observable<{{this.responseType}}>;
+    ): Promise<{{this.responseType}}>;
     {{else}}
     {{uncapitalize @key}}(
         request: {{this.requestType}}, 
         metadata?: Metadata
-    ): Promise<{{this.responseType}}> | Observable<{{this.responseType}}>;
+    ): Promise<{{this.responseType}}>;
+    
     {{/if}}
 {{/each}}
 }
+
 {{> selector }}
 {{/inline}}
 

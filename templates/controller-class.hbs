@@ -50,7 +50,7 @@ export class {{removeString @key "Microservice" "Controller"}} implements io.{{ 
     {{uncapitalize @key}}(
         request: {{this.requestType}}, 
         metadata?: Metadata
-    ): Promise<io.{{ uncapitalize (removeString ../name "Microservice" "")}}.{{this.responseType}}> | Observable<io.{{ uncapitalize (removeString ../name "Microservice" "")}}.{{this.responseType}}>{
+    ): Promise<io.{{ uncapitalize (removeString ../name "Microservice" "")}}.{{this.responseType}}> {
         return {};
     }
 
