@@ -44,13 +44,13 @@ import {
 
 {{#*inline "service"}}
 @Controller()
-export class {{@key}}Controller implements I{{@key}}{
+export class {{removeString @key "Microservice" "Controller"}} implements io.{{ uncapitalize (removeString @key "Microservice" "")}}.I{{@key}}{
 {{#each methods}}
-    @GrpcMethod('{{../name}}', '{{@key}}')
+    @GrpcMethod('io.{{ uncapitalize (removeString ../name "Microservice" "")}}.{{../name}}', '{{@key}}')
     {{uncapitalize @key}}(
         request: {{this.requestType}}, 
         metadata?: Metadata
-    ): Promise<{{this.responseType}}> | Observable<{{this.responseType}}>{
+    ): Promise<io.{{ uncapitalize (removeString ../name "Microservice" "")}}.{{this.responseType}}> | Observable<io.{{ uncapitalize (removeString ../name "Microservice" "")}}.{{this.responseType}}>{
         return {};
     }
 

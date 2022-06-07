@@ -10,6 +10,7 @@ import './handlebars/enum-comment-helper';
 import './handlebars/uncapitalize-hepler';
 import './handlebars/type-helper';
 import './handlebars/default-value-helper';
+import './handlebars/removestring-helper';
 
 import { IGenOptions } from '../types';
 

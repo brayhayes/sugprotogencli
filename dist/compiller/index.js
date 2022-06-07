@@ -12,6 +12,7 @@ require("./handlebars/enum-comment-helper");
 require("./handlebars/uncapitalize-hepler");
 require("./handlebars/type-helper");
 require("./handlebars/default-value-helper");
+require("./handlebars/removestring-helper");
 class Compiller {
     constructor(options) {
         this.options = options;

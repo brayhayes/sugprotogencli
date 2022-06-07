@@ -211,9 +211,14 @@
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
+      "../src/compiller/handlebars/removestring-helper.ts": {
+        "version": "7bdf8e9efae84673f6c7016c220244728d89d0c0fcd326427579a7b96c9bd055",
+        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "affectsGlobalScope": false
+      },
       "../src/compiller/index.ts": {
-        "version": "da83b9011dfcff2e2d08c03d4e81232cbd3c9f78f7dace480c09e98c7c8ecfb4",
-        "signature": "4d030e4beb03d89979a2ac2a15ad54f1b615c2eccbbfc1e1c75d1b0dd06996bb",
+        "version": "0238ba876d73c4aa198c75ebe0de473b25ea63b351e85f87cc67792ed25ffd1a",
+        "signature": "52ae3ff2e8194192557e52c1db336a0febc6f03af597b6fb279535a842a7a533",
         "affectsGlobalScope": false
       },
       "../src/options.ts": {
@@ -674,6 +679,9 @@
       "../src/compiller/handlebars/enum-comment-helper.ts": [
         "../node_modules/handlebars/types/index.d.ts"
       ],
+      "../src/compiller/handlebars/removestring-helper.ts": [
+        "../node_modules/handlebars/types/index.d.ts"
+      ],
       "../src/compiller/handlebars/type-helper.ts": [
         "../node_modules/handlebars/types/index.d.ts",
         "../src/types.ts"
@@ -692,6 +700,7 @@
         "../src/compiller/handlebars/comment-helper.ts",
         "../src/compiller/handlebars/default-value-helper.ts",
         "../src/compiller/handlebars/enum-comment-helper.ts",
+        "../src/compiller/handlebars/removestring-helper.ts",
         "../src/compiller/handlebars/type-helper.ts",
         "../src/compiller/handlebars/uncapitalize-hepler.ts",
         "../src/compiller/handlebars/var-helper.ts",
@@ -872,6 +881,7 @@
         "../src/compiller/handlebars/comment-helper.ts",
         "../src/compiller/handlebars/default-value-helper.ts",
         "../src/compiller/handlebars/enum-comment-helper.ts",
+        "../src/compiller/handlebars/removestring-helper.ts",
         "../src/compiller/handlebars/type-helper.ts",
         "../src/compiller/handlebars/uncapitalize-hepler.ts",
         "../src/compiller/handlebars/var-helper.ts",
@@ -975,6 +985,7 @@
       "../src/compiller/handlebars/comment-helper.ts",
       "../src/compiller/handlebars/default-value-helper.ts",
       "../src/compiller/handlebars/enum-comment-helper.ts",
+      "../src/compiller/handlebars/removestring-helper.ts",
       "../src/compiller/handlebars/type-helper.ts",
       "../src/compiller/handlebars/uncapitalize-hepler.ts",
       "../src/compiller/handlebars/var-helper.ts",
