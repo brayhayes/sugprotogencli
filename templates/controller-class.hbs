@@ -44,7 +44,7 @@ import {
 
 {{#*inline "service"}}
 @Controller()
-export class {{@key}}Controller {
+export class {{@key}}Controller implements I{{@key}}{
 {{#each methods}}
     @GrpcMethod('{{../name}}', '{{@key}}')
     {{uncapitalize @key}}(
